@@ -28,17 +28,12 @@ Route::get('/', function () {
 */
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
 Route::group(['middleware'=>'auth'], function()
 {
-/*
-| Forum Routes
-*/
-Route::group(['prefix'=>'forums'], function()
-{
-	Route::get('', 'ForumsController@index')->name('forum.index');
-});
+
+	// Forum Index Page
+	Route::get('home', 'ForumsController@index')->name('forum.index');
+
 });
 
 

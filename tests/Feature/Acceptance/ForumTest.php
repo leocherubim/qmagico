@@ -22,41 +22,59 @@ class ForumTest extends TestCase
 	 */
 	private $student;
 
-	public function setUp()
-	{
-		parent::setUp();
+	// public function setUp()
+	// {
+	// 	parent::setUp();
 
-		// Create Groups
-		$adminGroup = factory(Group::class)->states('admin')->create();
-		$studentGroup = factory(Group::class)->states('student')->create();
+	// 	// Create Groups
+	// 	$adminGroup = factory(Group::class)->states('admin')->create();
+	// 	$studentGroup = factory(Group::class)->states('student')->create();
 
-		// Admin User
-		$this->admin = factory(User::class)->create(['name'=>'Administrador', 'group_id'=>$adminGroup->id]);
-		// Student User
-		$this->student = factory(User::class)->create(['name'=>'Administrador', 'group_id'=>$studentGroup->id]);
-	}
+	// 	// Admin User
+	// 	$this->admin = factory(User::class)->create(['name'=>'Administrador', 'group_id'=>$adminGroup->id]);
+	// 	// Student User
+	// 	$this->student = factory(User::class)->create(['name'=>'Administrador', 'group_id'=>$studentGroup->id]);
+	// }
 
 	/**
 	 * @test
 	 */
-	public function admin_can_access_forum_page()
-	{
-		// set
-		// creating forums
-		$forumAsk = factory(Forum::class)->create(['user_id'=>$this->admin->id]);
-		$forumExplain = factory(Forum::class)->create(['user_id'=>$this->admin->id]);
-		// logged Admin
-		$this->be($this->admin);
-		// forums link
-		$forumsLink = route('forum.index');
+	// public function admin_can_access_forum_page()
+	// {
+	// 	// set
+	// 	// creating forums
+	// 	$forumAsk = factory(Forum::class)->create(['user_id'=>$this->admin->id]);
+	// 	$forumExplain = factory(Forum::class)->create(['user_id'=>$this->admin->id]);
+	// 	// logged Admin
+	// 	$this->be($this->admin);
+	// 	// forums link
+	// 	$forumsLink = route('forum.index');
 
-		// expectation
-		$this->visit('home');
-		$this->seeLink('Fóruns', $forumsLink);
-		$this->get($forumsLink);
+	// 	// expectation
+	// 	$this->visit('home');
+	// 	$this->seeLink('Fóruns', $forumsLink);
+	// 	$this->get($forumsLink);
 
-		// assertion
-		$this->see($forumAsk->title);
-		$this->see($forumExplain->title);
-	}
+	// 	// assertion
+	// 	$this->see($forumAsk->title);
+	// 	$this->see($forumExplain->title);
+	// }
+
+	/**
+	 * @test
+	 */
+	// public function student_cannot_access_forum_page()
+	// {
+	// 	// set
+	// 	// logged Student
+	// 	$this->be($this->student);
+	// 	// forums link
+	// 	$forumsLink = route('forum.index');
+
+	// 	// expectation
+	// 	$this->visit('home');
+		
+	// 	// assertion
+	// 	$this->dontSeeLink('Fóruns', $forumsLink);
+	// }
 }

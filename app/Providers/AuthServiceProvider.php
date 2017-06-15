@@ -4,6 +4,7 @@ namespace QMagico\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,10 +22,15 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(GateContract $gate)
     {
         $this->registerPolicies();
 
-        //
+        $gate->before(function($user, $ability)
+        {
+            if($user->group->name == 'Administrador') {
+                return true;
+            }
+        });
     }
 }
