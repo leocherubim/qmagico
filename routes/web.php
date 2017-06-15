@@ -30,6 +30,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::group(['middleware'=>'auth'], function()
+{
 /*
 | Forum Routes
 */
@@ -37,3 +39,6 @@ Route::group(['prefix'=>'forums'], function()
 {
 	Route::get('', 'ForumsController@index')->name('forum.index');
 });
+});
+
+

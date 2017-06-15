@@ -44,7 +44,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                        <li><a href="{{route('forum.index')}}">Fóruns</a></li>
+                        
+                        <!-- Authentication Links -->
+                        @if(Auth::check())
+                            <li><a href="{{route('forum.index')}}">Fóruns</a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
