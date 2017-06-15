@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(QMagico\User::class, function (Faker\Generator $faker) {
+$factory->define(QMagico\Entities\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -20,5 +20,29 @@ $factory->define(QMagico\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'group_id' => $faker->numberBetween($min = 1, $max = 2),
     ];
 });
+
+// Group Entitie
+$factory->define(QMagico\Entities\Group::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+    ];
+});
+
+// Admin Group
+$factory->state(QMagico\Entities\Group::class, 'admin', function($faker) {
+    return [
+        'name' => 'Administrador',
+    ];
+});
+
+// Student Group
+$factory->state(QMagico\Entities\Group::class, 'student', function($faker) {
+    return [
+        'name' => 'Estudante',
+    ];
+});
+
+

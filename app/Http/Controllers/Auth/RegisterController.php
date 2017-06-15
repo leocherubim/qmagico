@@ -6,6 +6,7 @@ use QMagico\Entities\User;
 use QMagico\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use QMagico\Entities\Group;
 
 class RegisterController extends Controller
 {
@@ -50,6 +51,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
+            'group' => 'required',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -65,7 +67,21 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'group_id' => $data['group'],
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm(Group $groupModel)
+    {
+        $groups = $groupModel->all();
+
+        return view('auth.register', compact('groups'));
+    }
+
 }
