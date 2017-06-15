@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->BelongsTo(Group::class);
     }
+
+    public function forums()
+    {
+        return $this->hasMany(Forum::class);
+    }
 }

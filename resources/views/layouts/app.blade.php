@@ -44,6 +44,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
+                        <li><a href="{{route('forum.index')}}">Fóruns</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

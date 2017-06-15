@@ -45,4 +45,11 @@ $factory->state(QMagico\Entities\Group::class, 'student', function($faker) {
     ];
 });
 
-
+// Forum Entitie
+$factory->define(QMagico\Entities\Forum::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->name,
+        'description' => $faker->text,
+        'user_id' => 1,
+    ];
+});
