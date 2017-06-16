@@ -44,6 +44,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
+
+                        <!-- Authentication Links -->
+                        @if (Auth::check())
+
+                            <!-- Admin Links -->
+                            @can('admin')
+                                <li><a href="{{route('forum.index')}}">Fóruns</a></li>
+                            @endcan
+
+                        @endif
                         
                     </ul>
 

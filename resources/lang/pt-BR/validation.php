@@ -144,6 +144,9 @@ return [
         'title'                 => 'título',
         'username'              => 'usuário',
         'year'                  => 'ano',
+
+        // QMagico Application Attributes
+        'group'                 => 'grupo',
     ],
 
 ];

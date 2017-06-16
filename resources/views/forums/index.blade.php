@@ -8,6 +8,11 @@
 
     <br>
 
+    <a href="{{route('forum.create')}}" class="btn btn-primary">Cadastrar</a>
+
+    <br>
+    <br>
+
     <table class="table">
         <thead>
             <th>Id</th>
@@ -21,6 +26,10 @@
                 <td>{{$forum->id}}</td>
                 <td>{{$forum->title}}</td>
                 <td>{{$forum->user->name}}</td>
+                <td>
+                    <a href="{{route('forum.edit', ['id'=>$forum->id])}}" class="btn btn-default">Editar</a>
+                    <a href="{{route('forum.destroy', ['id'=>$forum->id])}}" class="btn btn-danger">Deletar</a>
+                </td>
             </tbody>
         @endforeach
 

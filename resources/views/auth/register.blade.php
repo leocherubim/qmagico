@@ -44,7 +44,7 @@
 
                         <!-- Groups Input -->
                         <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
-                            <label for="groups" class="col-md-4 control-label">Grupos</label>
+                            <label for="groups" class="col-md-4 control-label">Grupo</label>
 
                             <div class="col-md-6">
                                 <select class="form-control" name="group">

@@ -31,14 +31,20 @@ class ForumTest extends TestCase
 	 */
 	public function create_simple_forum()
 	{
-		// set
+		/*
+		 * Set
+		 */
 		$forum = factory(Forum::class)->create(['title'=>'teste', 'user_id'=>$this->admin->id]);
 
-		// expectation
+		/*
+		 * Expectation
+		 */
 		$resultName = 'teste';
 		$resultUserName = 'Léo';
 
-		// assertion
+		/*
+		 * Assertion
+		 */
 		$this->assertEquals($resultName, $forum->title);
 		$this->assertEquals($resultName, $this->admin->forums->first()->title);
 		$this->assertEquals($resultUserName, $forum->user->name);

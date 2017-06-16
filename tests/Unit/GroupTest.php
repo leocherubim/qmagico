@@ -16,13 +16,19 @@ class GroupTest extends TestCase
 	 */
 	public function create_simple_group()
 	{
-		// set
+		/*
+		 * Set
+		 */
 		$group = factory(Group::class)->states('admin')->create();
 
-		// expectation
+		/*
+		 * Expectation
+		 */
 		$result = 'Administrador';
 
-		// assertion
+		/*
+		 * Assertion
+		 */
 		$this->assertEquals($result, $group->name);
 	}
 
@@ -31,14 +37,20 @@ class GroupTest extends TestCase
 	 */
 	public function create_admin_user()
 	{
-		// set
+		/*
+		 * Set
+		 */
 		$group = factory(Group::class)->states('admin')->create();
 		$user = factory(User::class)->create(['group_id'=>$group->id]);
 
-		// expectation
+		/*
+		 * Expectation
+		 */
 		$result = 'Administrador';
 
-		// assertion
+		/*
+		 * Assertion
+		 */
 		$this->assertEquals($result, $user->group->name);
 	}
 
@@ -47,16 +59,22 @@ class GroupTest extends TestCase
 	 */
 	public function show_student_user_list_into_group()
 	{
-		// set
+		/*
+		 * Set
+		 */
 		$group = factory(Group::class)->states('student')->create();
 		$student1 = factory(User::class)->create(['group_id'=>$group->id, 'name'=>'Léo']);
 		$student2 = factory(User::class)->create(['group_id'=>$group->id]);
 
-		// expectation
+		/*
+		 * Expectation
+		 */
 		$resultName = 'Léo';
 		$resultCountList = 2;
 
-		// assertion
+		/*
+		 * Assertion
+		 */
 		$this->assertEquals($resultName, $group->users->first()->name);
 		$this->assertCount($resultCountList, $group->users);
 	}
