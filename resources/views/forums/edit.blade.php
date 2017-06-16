@@ -8,7 +8,7 @@
 
     <br>
 
-    <form action="{{route('forum.update', ['id'=>$currentForum->id])}}" method="PUT">
+    <form action="{{route('forum.update', ['id'=>$currentForum->id])}}" method="POST">
 
         <!-- Token Input -->
         <input type="hidden" name="_token" value="{{csrf_token()}}">
