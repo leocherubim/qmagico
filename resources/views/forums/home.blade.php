@@ -4,7 +4,7 @@
 <div class="container">
     
     <!-- Forum Title -->
-    <h1>Fóruns</h1>
+    <h1>Discussões</h1>
 
     <br>
 
@@ -17,13 +17,15 @@
 
         @foreach($forums as $forum)
             <tbody>
-                <td class="col-sm-8">{{$forum->id}}</td>
-                <td class="col-sm-2">{{$forum->title}}</td>
+                <td class="col-sm-8"><a href="{{route('forum.show', ['id'=>$forum->id])}}">{{$forum->title}}</a></td>
                 <td class="col-sm-2">{{$forum->user->name}}</td>
+                <td class="col-sm-2">{{$forum->questions->count()}}</td>
             </tbody>
         @endforeach
 
     </table>
+
+    {!! $forums->render() !!}
 
 </div>
 @endsection

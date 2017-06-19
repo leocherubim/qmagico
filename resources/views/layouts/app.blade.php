@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ url('css/app.css') }}" rel="stylesheet">
+    <link href="{{ url('css/forum.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -45,12 +46,18 @@
                     <ul class="nav navbar-nav">
                         &nbsp;
 
+                        <li><a href="{{url('home')}}">Discuções</a></li>
+
                         <!-- Authentication Links -->
                         @if (Auth::check())
 
                             <!-- Admin Links -->
                             @can('admin')
-                                <li><a href="{{route('forum.index')}}">Fóruns</a></li>
+                                <li>
+                                    <a href="{{route('forum.index')}}">
+                                        <span class="glyphicon glyphicon-wrench"></span> Fóruns
+                                    </a>
+                                </li>
                             @endcan
 
                         @endif

@@ -42,17 +42,19 @@ Route::group(['middleware'=>'auth'], function()
 	Route::group(['prefix'=>'forum'], function()
 	{
 		// Forum Index Route
-		Route::get('', 'ForumsController@index')->name('forum.index');
+		Route::get('', 'ForumsController@index')->name('forum.index')->middleware('admin');
 		// Forum Create Route
-		Route::get('create', 'ForumsController@create')->name('forum.create');
+		Route::get('create', 'ForumsController@create')->name('forum.create')->middleware('admin');
 		// Forum Register Route
-		Route::post('store', 'ForumsController@store')->name('forum.store');
+		Route::post('store', 'ForumsController@store')->name('forum.store')->middleware('admin');
 		// Forum Register Route
-		Route::get('{id}/edit', 'ForumsController@edit')->name('forum.edit');
+		Route::get('{id}/edit', 'ForumsController@edit')->name('forum.edit')->middleware('admin');
 		// Forum Update Route
-		Route::put('{id}/update', 'ForumsController@update')->name('forum.update');
+		Route::put('{id}/update', 'ForumsController@update')->name('forum.update')->middleware('admin');
 		// Forum Delete Route
-		Route::get('{id}/destroy', 'ForumsController@destroy')->name('forum.destroy');
+		Route::get('{id}/destroy', 'ForumsController@destroy')->name('forum.destroy')->middleware('admin');
+		// Forum Show Route
+		Route::get('{id}/show', 'ForumsController@show')->name('forum.show');
 	});
 
 });

@@ -4,6 +4,7 @@ var elixir = require('laravel-elixir'),
 
 elixir(function(mix) {
     mix.copy(bowerDir + 'bootstrap/fonts', 'public/fonts')
+        .copy(bowerDir + 'font-awesome/fonts', 'public/fonts')
 
     	.copy(bowerDir + 'jquery/dist/jquery.min.js', 'resources/assets/js')
         .copy(bowerDir + 'bootstrap/dist/js/bootstrap.min.js', 'resources/assets/js')
@@ -22,5 +23,7 @@ elixir(function(mix) {
 
         ], 'public/js/scripts.js')
 
-        .less('app.less');
+        .less('app.less')
+
+        .styles('forum.css');
 });

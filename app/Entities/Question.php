@@ -4,25 +4,30 @@ namespace QMagico\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Forum extends Model
+class Question extends Model
 {
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'user_id',
+        'title', 'forum_id', 'user_id',
     ];
+
+    public function forum()
+    {
+    	return $this->belongsTo(Forum::class);
+    }
 
     public function user()
     {
     	return $this->belongsTo(User::class);
     }
 
-    public function questions()
+    public function answers()
     {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Answer::class);
     }
-    
 }

@@ -41,5 +41,7 @@
         </tfoot>
     </table>
 
+    {!! $forums->render() !!}
+
 </div>
 @endsection

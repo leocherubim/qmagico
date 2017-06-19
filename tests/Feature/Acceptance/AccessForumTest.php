@@ -7,6 +7,7 @@ use QMagico\Entities\Forum;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use QMagico\Entities\User;
 use QMagico\Entities\Group;
+use QMagico\Entities\Question;
 
 class AccessForumTest extends TestCase
 {
@@ -93,6 +94,30 @@ class AccessForumTest extends TestCase
 	/**
 	 * @test
 	 */
+	public function student_cannot_access_forum_routes()
+	{
+		/*
+		 * Set
+		 */
+		// logged Student
+		$this->be($this->student);
+		// forums link
+		$forumsLink = route('forum.index');
+
+		/*
+		 * Expectation
+		 */
+		$this->get($forumsLink);
+
+		/*
+		 * Assertion
+		 */
+		$this->assertRedirectedTo('home');
+	}
+
+	/**
+	 * @test
+	 */
 	public function student_see_forum_list()
 	{
 		/*
@@ -115,6 +140,70 @@ class AccessForumTest extends TestCase
 		$this->see($forumAsk->name);
 		$this->see($forumExplain->name);
 
+	}
+
+	/**
+	 * @test
+	 */
+	public function display_forum_list_with_questions_count()
+	{
+		/*
+		 * Set
+		 */
+		// creating forums
+		$forumAsk = factory(Forum::class)->create(['user_id'=>$this->admin->id]);
+		$forumExplain = factory(Forum::class)->create(['user_id'=>$this->admin->id]);
+		// creating questions
+		$question1 = factory(Question::class)->create([
+			'forum_id' => $forumExplain->id,
+			'user_id' => $this->admin->id
+		]);
+		$question2 = factory(Question::class)->create([
+			'forum_id' => $forumExplain->id,
+			'user_id' => $this->admin->id
+		]);
+
+		// logged Student
+		$this->be($this->student);
+
+		/*
+		 * Expectation
+		 */
+		$this->visit('home');
+
+		/*
+		 * Assertion
+		 */
+		$this->see('<td class="col-sm-2">0</td>');
+		$this->see('<td class="col-sm-2">2</td>');
+	}
+
+	/**
+	 * @test
+	 */
+	public function display_forum_view()
+	{
+		/*
+		 * Set
+		 */
+		$forumAsk = factory(Forum::class)->create(['user_id'=>$this->admin->id]);
+		// logged Student
+		$this->be($this->student);
+		// Show Forum Route
+		$routeForumShow = route('forum.show', ['id'=>$forumAsk->id]);
+
+		/*
+		 * Expectation
+		 */
+		$this->visit('home');
+		$this->get($routeForumShow);
+
+		/*
+		 * Assertion
+		 */
+		$this->seePageIs($routeForumShow);
+		$this->see($forumAsk->title);
+		$this->see($forumAsk->description);
 	}
 
 }

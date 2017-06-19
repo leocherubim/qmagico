@@ -83,7 +83,9 @@ class ForumsController extends Controller
      */
     public function show($id)
     {
-        //
+        $forum = $this->forumModel->find($id);
+
+        return view('forums.show', compact('forum'));
     }
 
     /**
