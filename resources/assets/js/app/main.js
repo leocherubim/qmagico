@@ -1,1 +1,1 @@
-angular.module('forum', ['ngRoute', 'ngResource']);
+angular.module('forum', ['ngRoute', 'ngResource', 'forumService']);

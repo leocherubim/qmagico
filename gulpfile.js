@@ -19,7 +19,9 @@ elixir(function(mix) {
             'angular-resource.min.js',
             'angular-route.min.js',
             'app/main.js',
-            'app/controllers/forum-controller.js'
+            'app/controllers/forum-controller.js',
+            'app/controllers/question-controller.js',
+            'app/services/forum-service.js',
 
         ], 'public/js/scripts.js')
 

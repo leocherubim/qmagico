@@ -1,12 +1,23 @@
 <?php
 
-namespace QMagico\Http\Controllers\API;
+namespace QMagico\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use QMagico\Http\Controllers\Controller;
+use QMagico\Entities\Question;
 
 class QuestionsController extends Controller
 {
+    /**
+     * @Question
+     */
+    private $questionModel;
+
+    public function __construct(Question $questionModel)
+    {
+        $this->questionModel = $questionModel;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +25,10 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        //
-    }
+        // Order By Desc
+        $questions = $this->questionModel->with('user')->orderBy('created_at', 'desc')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $questions;
     }
 
     /**
@@ -35,29 +39,7 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $this->questionModel->create($request->all());
     }
 
     /**
@@ -69,7 +51,8 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = $this->questionModel->find($id);
+        $question->update($request->all());
     }
 
     /**
@@ -80,6 +63,7 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = $this->questionModel->find($id);
+        $question->delete();
     }
 }

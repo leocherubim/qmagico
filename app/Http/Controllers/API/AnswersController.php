@@ -1,6 +1,6 @@
 <?php
 
-namespace QMagico\Http\Controllers\API;
+namespace QMagico\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use QMagico\Http\Controllers\Controller;
@@ -13,16 +13,6 @@ class AnswersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -45,17 +35,6 @@ class AnswersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }

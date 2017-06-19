@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <div class="col-sm-12">
+    <div class="col-sm-12" ng-controller="QuestionsController">
 
     	<!-- Forum -->
     	<div class = "panel panel-default">
@@ -21,37 +21,35 @@
 		   <!-- Question Create Button -->
 		   @can('admin')
 			   <div class = "panel-footer">
-			      <a href="" class="btn btn-primary">Nova Pergunta</a>
+			      <a href="" class="btn btn-primary" data-toggle="modal" data-target="#postModal" data-whatever="@mdo">Nova Pergunta</a>
 			   </div>
 		   @endcan
+
+            @include('forums.create_answer')
 
 		</div>
 		<!-- / Forum -->
 
-        <div class="panel panel-white post panel-shadow">
+        <div class="panel panel-white post panel-shadow" ng-repeat="question in questions">
+
             <div class="post-heading">
                 <div class="pull-left image">
                     <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
                 </div>
                 <div class="pull-left meta">
                     <div class="title h5">
-                        <a href="#"><b>Ryan Haywood</b></a>
-                        made a post.
+                        <a href="#"><b>@{{question.user.name}}</b></a>
+                        criou uma pergunta.
                     </div>
-                    <h6 class="text-muted time">1 minute ago</h6>
-                </div>
-            </div> 
-            <div class="post-description"> 
-                <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
-                <div class="stats">
-                    <a href="#" class="btn btn-default stat-item">
-                        <i class="fa fa-thumbs-up icon"></i>2
-                    </a>
-                    <a href="#" class="btn btn-default stat-item">
-                        <i class="fa fa-share icon"></i>12
-                    </a>
+                    
                 </div>
             </div>
+
+            <div class="post-description"> 
+                <p>@{{question.title}}</p>
+                
+            </div>
+
             <div class="post-footer">
                 <div class="input-group"> 
                     <input class="form-control" placeholder="Add a comment" type="text">

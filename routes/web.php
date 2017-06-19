@@ -39,6 +39,7 @@ Route::group(['middleware'=>'auth'], function()
 	// Home Application
 	Route::get('home', 'ForumsController@home')->name('forum.home');
 
+	// Forums Route
 	Route::group(['prefix'=>'forum'], function()
 	{
 		// Forum Index Route
@@ -55,6 +56,19 @@ Route::group(['middleware'=>'auth'], function()
 		Route::get('{id}/destroy', 'ForumsController@destroy')->name('forum.destroy')->middleware('admin');
 		// Forum Show Route
 		Route::get('{id}/show', 'ForumsController@show')->name('forum.show');
+	});
+
+	// Question API Routes
+	Route::group(['prefix'=>'api/question', 'namespace'=>'Api'], function()
+	{
+		// GET
+		Route::get('', 'QuestionsController@index');
+		// POST
+		Route::post('', 'QuestionsController@store');
+		// PUT
+		Route::put('{id}', 'QuestionsController@update');
+		// DELETE
+		Route::delete('{id}', 'QuestionsController@destroy');
 	});
 
 });
