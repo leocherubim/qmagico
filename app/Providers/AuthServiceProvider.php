@@ -32,5 +32,9 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
+
+        $gate->define('answer', function ($user, $answer) {
+            return $user->id == $answer->user_id;
+        });
     }
 }

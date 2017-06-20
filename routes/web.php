@@ -64,11 +64,11 @@ Route::group(['middleware'=>'auth'], function()
 		// GET
 		Route::get('', 'QuestionsController@index');
 		// POST
-		Route::post('', 'QuestionsController@store');
+		Route::post('', 'QuestionsController@store')->middleware('admin');
 		// PUT
-		Route::put('{id}', 'QuestionsController@update');
+		Route::put('{id}', 'QuestionsController@update')->middleware('admin');
 		// DELETE
-		Route::delete('{id}', 'QuestionsController@destroy');
+		Route::delete('{id}', 'QuestionsController@destroy')->middleware('admin');
 	});
 
 	// Answer API Routes

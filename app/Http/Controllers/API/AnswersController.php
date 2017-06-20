@@ -5,6 +5,7 @@ namespace QMagico\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use QMagico\Http\Controllers\Controller;
 use QMagico\Entities\Answer;
+use Gate;
 
 class AnswersController extends Controller
 {
@@ -57,6 +58,12 @@ class AnswersController extends Controller
     public function update(Request $request, $id)
     {
         $answer = $this->answerModel->find($id);
+
+        // check user permission
+        if (Gate::denies('answer', $answer)) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $answer->update($request->all());
     }
 
@@ -69,6 +76,12 @@ class AnswersController extends Controller
     public function destroy($id)
     {
         $answer = $this->answerModel->find($id);
+
+        // check user permission
+        if (Gate::denies('answer', $answer)) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $answer->delete();
     }
 }

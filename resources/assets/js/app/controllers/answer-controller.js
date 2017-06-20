@@ -26,7 +26,7 @@ angular.module('forum')
 			data.title = null;
 
 			answerService.save(result, function() {
-				$scope.answers.unshift(result);
+				$scope.init(questionId);
 			}, function(error) {
 				console.log(error);
 			});

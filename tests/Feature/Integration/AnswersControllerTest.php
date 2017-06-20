@@ -222,4 +222,140 @@ class AnswersControllerTest extends TestCase
 		$this->assertNull($resultAnswerNotExists);
 	}
 
+	/**
+	 * @test
+	 */
+	public function student_cannot_delete_answer_of_the_other_users()
+	{
+		/*
+		 * Set
+		 */
+		$this->be($this->student);
+		// create Admin User
+		$adminGroup = factory(Group::class)->states('admin')->create();
+		$admin = factory(User::class)->create(['group_id'=>$adminGroup->id, 'name'=>'Leonardo Cherubini']);
+
+		$answer = factory(Answer::class)->create([
+			'user_id'=>$admin->id, 
+			'question_id'=>$this->question->id, 
+			'title'=>'teste'
+		]);
+
+		/*
+		 * Expectation
+		 */
+		// execute DELETE
+		$this->delete('api/answer/'.$answer->id);
+
+		/*
+		 * Assertion
+		 */
+		$this->assertResponseStatus(403);
+	}
+
+	/**
+	 * @test
+	 */
+	public function student_cannot_update_answer_of_the_other_users()
+	{
+		/*
+		 * Set
+		 */
+		$this->be($this->student);
+		// create Admin User
+		$adminGroup = factory(Group::class)->states('admin')->create();
+		$admin = factory(User::class)->create(['group_id'=>$adminGroup->id, 'name'=>'Leonardo Cherubini']);
+
+		$answer = factory(Answer::class)->create([
+			'user_id'=>$admin->id, 
+			'question_id'=>$this->question->id, 
+			'title'=>'teste'
+		]);
+
+		// input answer
+		$data = [
+			'id'=>$answer->id,
+			'user_id'=>$admin->id, 
+			'question_id'=>$this->question->id, 
+			'title'=>'Resposta Atualizada'
+		];
+
+		// execute PUT
+		$this->put('api/answer/'.$answer->id, $data);
+
+		/*
+		 * Assertion
+		 */
+		$this->assertResponseStatus(403);
+	}
+
+	/**
+	 * @test
+	 */
+	public function admin_can_delete_answer_of_the_other_users()
+	{
+		/*
+		 * Set
+		 */
+		// create Admin User
+		$adminGroup = factory(Group::class)->states('admin')->create();
+		$admin = factory(User::class)->create(['group_id'=>$adminGroup->id, 'name'=>'Leonardo Cherubini']);
+
+		$this->be($admin);
+
+		$answer = factory(Answer::class)->create([
+			'user_id'=>$this->student->id, 
+			'question_id'=>$this->question->id, 
+			'title'=>'teste'
+		]);
+
+		/*
+		 * Expectation
+		 */
+		// execute DELETE
+		$this->delete('api/answer/'.$answer->id);
+
+		/*
+		 * Assertion
+		 */
+		$this->assertResponseStatus(200);
+	}
+
+	/**
+	 * @test
+	 */
+	public function admin_can_update_answer_of_the_other_users()
+	{
+		/*
+		 * Set
+		 */
+		// create Admin User
+		$adminGroup = factory(Group::class)->states('admin')->create();
+		$admin = factory(User::class)->create(['group_id'=>$adminGroup->id, 'name'=>'Leonardo Cherubini']);
+
+		$this->be($this->student);
+
+		$answer = factory(Answer::class)->create([
+			'user_id'=>$this->student->id, 
+			'question_id'=>$this->question->id, 
+			'title'=>'teste'
+		]);
+
+		// input answer
+		$data = [
+			'id'=>$answer->id,
+			'user_id'=>$this->student->id, 
+			'question_id'=>$this->question->id, 
+			'title'=>'Resposta Atualizada'
+		];
+
+		// execute PUT
+		$this->put('api/answer/'.$answer->id, $data);
+
+		/*
+		 * Assertion
+		 */
+		$this->assertResponseStatus(200);
+	}
+
 }

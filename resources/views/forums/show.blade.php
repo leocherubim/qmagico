@@ -70,16 +70,21 @@
                             <img class="avatar" src="/img/person.png" alt="avatar">
                         </a>
 
-                        <!-- Delete Icon -->
-                        <a class="btn pull-right" ng-click="delete(answer)">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </a>
+                        <!-- Condition to manipulation -->
+                        <div ng-if="{{Auth::user()->id}} === answer.user_id || {{Auth::user()->group->id}} === 1">
 
-                        <!-- Edit Icon -->
-                        <a class="btn pull-right" data-toggle="modal" data-target="#editModal-@{{answer.id}}" data-whatever="@mdo">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                        </a>
-                        
+                            <!-- Delete Icon -->
+                            <a class="btn pull-right" ng-click="delete(answer)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </a>
+
+                            <!-- Edit Icon -->
+                            <a class="btn pull-right" data-toggle="modal" data-target="#editModal-@{{answer.id}}" data-whatever="@mdo">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </a>
+
+                        </div>
+
                         @include('forums.edit_answer')
 
                         <div class="comment-body">
