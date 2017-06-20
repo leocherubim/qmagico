@@ -46,10 +46,10 @@
                     <ul class="nav navbar-nav">
                         &nbsp;
 
-                        <li><a href="{{url('home')}}">Discuções</a></li>
-
                         <!-- Authentication Links -->
                         @if (Auth::check())
+
+                            <li><a href="{{url('home')}}">Discuções</a></li>
 
                             <!-- Admin Links -->
                             @can('admin')
