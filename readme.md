@@ -63,3 +63,91 @@ php artisan serve
 	pastas do projeto, principalmente nas pastas onde estão a régra de negócio e os códigos de teste.
 </p>
 
+### Configuração de Banco de dados
+
+<p>
+	A configuração de banco de dados está presente no seguinte caminho: config/database.php. <br>
+	Neste arquivo pode ser escolhido qual o SGBD de preferência. Após a escolha do banco de dados e <br>
+	do resgistro das respectivas credenciais, o próximo passo será apresentar a estruturas de pastas <br>
+	responsáveis por trabalhar com a persistência de dados no Laravel. Na pasa database estão todos as <br>
+	arquivos responsáveis por criar tabelas, gerenciá-las, testas estruturas e demais funcionalidades. Existe 
+	uma pasta chamada seed onde será usado apenas um arquivo para a criação das categorias dos usuários. Em 
+	relação ao banco de dados em geral, a única pasta de real 	importância para está documentação é a migrations. 
+	Pois é nela que temos declarados as tabelas usadas na aplicação. As tabelas criadas para a presente aplicação <br>
+	estão listadas logo abaixo:
+</p>
+
+<ul>
+	<li>groups</li>
+	<li>users</li>
+	<li>forums</li>
+	<li>questions</li>
+	<li>answers</li>
+</ul>
+
+### Criando as tabelas no banco de dados
+
+<p>Execute o comando a seguir:</p>
+
+```
+php artisan migration --seed
+```
+
+<p>
+	O comando artisan migration são responsáveis por criar as tabelas e o --seed apenas automatiza
+	a criação dos dois grupos de usuários solicitados para poder dar sequência as soliciações feitas na aplicação.
+</p>
+
+<p>
+	Todas as dependências necessários para o funcionamento correto da aplicação já foram atendidas. Agora o sistema
+	está pronto para a avaliação.
+</p>
+
+<p>
+	A estrutura de pastas do Laravel pode paracer um pouco confusa no começo, mas  para este tutorial, as únicas pastas <br>
+	que importam são app/, resources/ e tests/. Existe também a pasta route/ onde as rotas foram mapeadas.
+</p>
+
+<ul>
+	<li>app - é neste diretório onde encontram-se todos os arquivos de regra de negócio</li>
+	<li>resources - está pasta possui todos os arquivos de visualização da aplicação</li>
+	<li>tests - para está avaliação, foi feita a quebra dos teste em aceitação, integração e unitários</li>
+</ul>
+
+### Resources
+
+<p>
+	A pastas resources possui os arquivos less, css, js e o template engine Blade. Como o objetivo
+	de maximizar a performace da aplicação, foi adotado o sistema de minificação de arquivos css e
+	JavaScript utilizando o automatizador de tarefas GULP. Segue a baixo a estrutura de pastas.
+</p>
+
+```
+assets/
+lang/
+views/
+```
+
+<p>
+	O ponta mais importante a ser abordade em resource foi a localização dos arquivos do Angular. Estes estão presentes em assets/js/app.
+</p>
+
+## Padrões de codificações
+
+<p>
+	Como padrão de desenvolvimento, em todo o desenvolvimento foi utlizada TDD. Primeiramente, a organização das views deram origem aos <br>testes de aceitação. Após a criação das entidades foram surgindo os testes de unidade. Por fim, foram criados alguns testes de aceitação <br> e integração para complementar a contrução da API.
+</p>
+
+<p>
+	Na pasta app/Http/ estão os controles da aplicação e da API responsáveis pelos questionários e <br> responstas. Na pasta app/Entities/ estão as entidades do banco. Durante o desenvolvimento <br> do Angular foram criados dois controles e um serviço.
+</p>
+
+<p>
+	Por fim, este projeto utilizou as convenções de programação recomendadas pela comunidade Laravel. Todo o processo de desenvolvimento foi <br>baseado no TDD. É utilizado o sistema de autenticação simples do Laravel e por fim, foi criado uma pequena API para a criação de <br>perguntas. Como medida de segurança, o Angular, não deixa os usuários acessarem os botões para a manipulação das perguntas de outros <br>
+	usuários. E o Laravel mantem o back-end protegido dos usuários que tentarem efetuar requisições a componentes de outros usuários.
+
+</p>
+
+
+
+
