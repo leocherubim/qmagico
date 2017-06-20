@@ -32,4 +32,17 @@ angular.module('forum')
 			});
 		}
 
+		// delete answer
+		$scope.delete = function(answer) {
+			if(confirm("Confima a exclusão da tarefa?")) {
+				answerService.delete({id: answer.id}, function() {
+					var answerIndex = $scope.answers.indexOf(answer);
+					$scope.answers.splice(answerIndex, 1);
+				}, function(error) {
+					console.log(error);
+					window.alert('Não foi possível excluir a tarefa.');
+				});
+			}
+		};
+
 	}]);

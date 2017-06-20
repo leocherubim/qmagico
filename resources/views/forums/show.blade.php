@@ -53,11 +53,11 @@
 
                 <!-- Answer Input -->
                 <div class="input-group"> 
-                    <input class="form-control" ng-keyup="$event.keyCode == 13 && store(data, {{Auth::user()->id}}, '{{Auth::user()->name}}', question.id)"
-                        ng-model="data.title" placeholder="Add a comment" type="text">
+                    <input class="form-control" ng-model="data.title" placeholder="Add a comment" type="text"
+                        ng-keyup="$event.keyCode == 13 && store(data, {{Auth::user()->id}}, '{{Auth::user()->name}}', question.id)">
+                    
                     <span class="input-group-addon">
                         <a ng-click="store(data, {{Auth::user()->id}}, '{{Auth::user()->name}}', question.id)"><i class="fa fa-edit"></i></a>
-
                     </span>
                 </div>
 
@@ -67,6 +67,10 @@
                         <!-- User Icon -->
                         <a class="pull-left" href="#">
                             <img class="avatar" src="/img/person.png" alt="avatar">
+                        </a>
+
+                        <a class="pull-right" ng-click="delete(answer)">
+                            <span  class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </a>
 
                         <div class="comment-body">
@@ -80,6 +84,8 @@
                             <!-- Answer -->
                             <p>@{{answer.title}}</p>
                         </div>
+
+                        
                     </li>
                 </ul>
                 <!-- / Answer -->

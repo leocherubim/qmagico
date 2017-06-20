@@ -150,76 +150,76 @@ class AnswersControllerTest extends TestCase
 		$this->assertEquals($resultAnswerTitle, $this->question->answers->first()->title);
 	}
 
-	// /**
-	//  * @test
-	//  */
-	// public function update_question()
-	// {
-	// 	/*
-	// 	 * Set
-	// 	 */
-	// 	// logged Admin
-	// 	$this->be($this->admin);
-	// 	// data to persiste
-	// 	$question = factory(Question::class)->create([
-	// 		'user_id'=>$this->admin->id, 
-	// 		'forum_id'=>$this->forum->id, 
-	// 		'title'=>'teste'
-	// 	]);
-
-	// 	// input question
-	// 	$data = [
-	// 		'id'=>$question->id,
-	// 		'user_id'=>$question->user_id,
-	// 		'forum_id'=>$question->forum_id,
-	// 		'title'=>'teste atualizado',
-	// 	];
-
-	// 	// execute PUT
-	// 	$this->put('api/question/'.$question->id, $data);
-
-	// 	/*
-	// 	 * Expectation
-	// 	 */
-	// 	$resultQuestionTitle = 'teste atualizado';
-
-	// 	/*
-	// 	 * Assertion
-	// 	 */
-	// 	$this->assertEquals($resultQuestionTitle, $this->forum->questions->first()->title);
-	// }
-
-	// /**
-	//  * @test
-	//  */
-	// public function delete_question()
-	// {
-	// 	/*
-	// 	 * Set
-	// 	 */
-	// 	// logged Admin
-	// 	$this->be($this->admin);
-	// 	// data to persiste
-	// 	$question = factory(Question::class)->create([
-	// 		'user_id'=>$this->admin->id, 
-	// 		'forum_id'=>$this->forum->id, 
-	// 		'title'=>'teste'
-	// 	]);
-
-	// 	// execute DELETE
-	// 	$this->delete('api/question/'.$question->id);
-
-	// 	/*
-	// 	 * Expectation
-	// 	 */
-	// 	$resultQuestionsCount = 0;
-	// 	$resultQuestionNotExists = Question::find($question->id);
+	/**
+	 * @test
+	 */
+	public function update_answer()
+	{
+		/*
+		 * Set
+		 */
+		// logged Admin
+		$this->be($this->student);
 		
-	// 	/*
-	// 	 * Assertion
-	// 	 */
-	// 	$this->assertCount($resultQuestionsCount, $this->forum->questions);
-	// 	$this->assertNull($resultQuestionNotExists);
-	// }
+		$answer = factory(Answer::class)->create([
+			'user_id'=>$this->student->id, 
+			'question_id'=>$this->question->id, 
+			'title'=>'teste'
+		]);
+
+		// input answer
+		$data = [
+			'id'=>$answer->id,
+			'user_id'=>$this->student->id, 
+			'question_id'=>$this->question->id, 
+			'title'=>'Resposta Atualizada'
+		];
+
+		// execute PUT
+		$this->put('api/answer/'.$answer->id, $data);
+
+		/*
+		 * Expectation
+		 */
+		$resultAnswerTitle = 'Resposta Atualizada';
+
+		/*
+		 * Assertion
+		 */
+		$this->assertEquals($resultAnswerTitle, $this->question->answers->first()->title);
+	}
+
+	/**
+	 * @test
+	 */
+	public function delete_answer()
+	{
+		/*
+		 * Set
+		 */
+		// logged Admin
+		$this->be($this->student);
+		
+		$answer = factory(Answer::class)->create([
+			'user_id'=>$this->student->id, 
+			'question_id'=>$this->question->id, 
+			'title'=>'teste'
+		]);
+
+		// execute DELETE
+		$this->delete('api/answer/'.$answer->id);
+
+		/*
+		 * Expectation
+		 */
+		$resultAnswersCount = 0;
+		$resultAnswerNotExists = Answer::find($answer->id);
+		
+		/*
+		 * Assertion
+		 */
+		$this->assertCount($resultAnswersCount, $this->question->answers);
+		$this->assertNull($resultAnswerNotExists);
+	}
 
 }
