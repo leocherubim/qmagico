@@ -4,17 +4,36 @@ namespace QMagico\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use QMagico\Http\Controllers\Controller;
+use QMagico\Entities\Answer;
 
 class AnswersController extends Controller
 {
+
+    /**
+     * @Answer
+     */
+    private $answerModel;
+
+    public function __construct(Answer $answerModel)
+    {
+        $this->answerModel = $answerModel;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        // Order By Desc
+        $answers = $this->answerModel
+            ->with('user')
+            ->where('parent_id', '=', null)
+            ->where('question_id', '=', $id)
+            ->orderBy('created_at', 'desc')->get();
+
+        return $answers;
     }
 
     /**
@@ -25,7 +44,7 @@ class AnswersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->answerModel->create($request->all());
     }
 
     /**

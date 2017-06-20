@@ -15,6 +15,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        './vendor/bower_components/angular/angular.js',
+        './vendor/bower_components/angular-ui-router/release/angular-ui-router.js',
+        './vendor/bower_components/angular-mocks/angular-mocks.js',
+        './resources/assets/js/app/main.js',
+        './resources/assets/js/app/services/forum-service.js',
+        './resources/assets/js/app/controllers/question-controller.js',
         './resources/assets/js/app/services/questions.spec.js'
     ],
 

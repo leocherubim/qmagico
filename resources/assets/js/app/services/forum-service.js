@@ -7,4 +7,13 @@ angular.module('forumService', ['ngResource'])
 					method: 'PUT'
 				}
 			});
+		}])
+	
+	.factory('answerService', ['$resource', function($resource) {
+	
+			return $resource('/api/answer/:id', null, {
+				'update' : { 
+					method: 'PUT'
+				}
+			});
 		}]);

@@ -71,6 +71,19 @@ Route::group(['middleware'=>'auth'], function()
 		Route::delete('{id}', 'QuestionsController@destroy');
 	});
 
+	// Answer API Routes
+	Route::group(['prefix'=>'api/answer', 'namespace'=>'Api'], function()
+	{
+		// GET
+		Route::get('{id}', 'AnswersController@index');
+		// POST
+		Route::post('', 'AnswersController@store');
+		// PUT
+		Route::put('{id}', 'AnswersController@update');
+		// DELETE
+		Route::delete('{id}', 'AnswersController@destroy');
+	});
+
 });
 
 

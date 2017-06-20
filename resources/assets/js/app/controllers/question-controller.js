@@ -1,8 +1,10 @@
 angular.module('forum')
-	.controller('QuestionsController', ['$scope', '$routeParams', 'questionService', function($scope, $routeParams, questionService, userService) {
+	.controller('QuestionsController', ['$scope', '$routeParams', 'questionService', function($scope, $routeParams, questionService) {
 
 		$scope.questions = [];
-		$scope.title = '';
+		$scope.question = {
+
+		};
 
 		// read all questions
 		questionService.query(function(questions) {
@@ -13,14 +15,23 @@ angular.module('forum')
 
 		// save question
 		$scope.store = function(data, forumId, userId, userName) {
-			data.forum_id = forumId;
-			data.user_id = userId;
-			data.user = {
+			// data.forum_id = forumId;
+			// data.user_id = userId;
+			// data.user = {
+			// 	name: userName,
+			// };
+			var result = {};
+			result.title = data.title;
+			result.forum_id = forumId;
+			result.user_id = userId;
+			result.user = {
 				name: userName,
-			};
+			}
 
-			questionService.save(data, function() {
-				$scope.questions.unshift(data);
+			data.title = null;
+
+			questionService.save(result, function() {
+				$scope.questions.unshift(result);
 			}, function(error) {
 				console.log(error);
 			});
