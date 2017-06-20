@@ -18,7 +18,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" ng-click="store(question, {{$forum->id}}, {{Auth::user()->id}}, '{{Auth::user()->name}}')" data-dismiss="modal" class="btn btn-primary">Criar Postagem</button>
+          <button type="button" ng-click="store(question, {{$forum->id}}, {{Auth::user()->id}}, '{{Auth::user()->name}}')" data-dismiss="modal" class="btn btn-primary">Criar Pergunta</button>
         </div>
       </div>
     </div>

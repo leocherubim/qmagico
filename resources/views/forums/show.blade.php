@@ -64,14 +64,23 @@
                 <!-- Answer -->
                 <ul class="comments-list">
                     <li class="comment" ng-repeat="answer in answers">
+                        
                         <!-- User Icon -->
                         <a class="pull-left" href="#">
                             <img class="avatar" src="/img/person.png" alt="avatar">
                         </a>
 
-                        <a class="pull-right" ng-click="delete(answer)">
-                            <span  class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        <!-- Delete Icon -->
+                        <a class="btn pull-right" ng-click="delete(answer)">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </a>
+
+                        <!-- Edit Icon -->
+                        <a class="btn pull-right" data-toggle="modal" data-target="#editModal-@{{answer.id}}" data-whatever="@mdo">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </a>
+                        
+                        @include('forums.edit_answer')
 
                         <div class="comment-body">
 
@@ -84,13 +93,13 @@
                             <!-- Answer -->
                             <p>@{{answer.title}}</p>
                         </div>
-
-                        
+ 
                     </li>
                 </ul>
                 <!-- / Answer -->
 
             </div>
+
         </div>
     </div>
 </div>

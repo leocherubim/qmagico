@@ -19,7 +19,9 @@
             <tbody>
                 <td class="col-sm-8"><a href="{{route('forum.show', ['id'=>$forum->id])}}">{{$forum->title}}</a></td>
                 <td class="col-sm-2">{{$forum->user->name}}</td>
-                <td class="col-sm-2">{{$forum->questions->count()}}</td>
+                <td class="col-sm-2">
+                    <span class="badge badge-inverse">{{$forum->questions->count()}}</span>
+                </td>
             </tbody>
         @endforeach
 

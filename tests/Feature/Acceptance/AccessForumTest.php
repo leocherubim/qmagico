@@ -174,8 +174,8 @@ class AccessForumTest extends TestCase
 		/*
 		 * Assertion
 		 */
-		$this->see('<td class="col-sm-2">0</td>');
-		$this->see('<td class="col-sm-2">2</td>');
+		$this->see('<span class="badge badge-inverse">0</span>');
+		$this->see('<span class="badge badge-inverse">2</span>');
 	}
 
 	/**

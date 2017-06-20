@@ -15,11 +15,6 @@ angular.module('forum')
 
 		// save question
 		$scope.store = function(data, forumId, userId, userName) {
-			// data.forum_id = forumId;
-			// data.user_id = userId;
-			// data.user = {
-			// 	name: userName,
-			// };
 			var result = {};
 			result.title = data.title;
 			result.forum_id = forumId;

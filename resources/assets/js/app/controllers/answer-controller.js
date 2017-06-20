@@ -32,6 +32,22 @@ angular.module('forum')
 			});
 		}
 
+		// update answer
+		$scope.update = function(answer) {
+			var result = {};
+			result.id = answer.id;
+			result.title = answer.title;
+			result.user = {
+				name: answer.user.name,
+			};
+
+			answerService.update({id: result.id}, result, function() {
+				answer = result;
+			}, function(error) {
+				console.log(erro);
+			});
+		}
+
 		// delete answer
 		$scope.delete = function(answer) {
 			if(confirm("Confima a exclusão da tarefa?")) {
